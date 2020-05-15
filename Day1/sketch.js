@@ -43,10 +43,18 @@ class Time {
     }
 }
 
-let width = 500;
-let height = 500;
+let width;
+let height;
+
+function windowResized() {
+    width = windowWidth;
+    height = windowHeight;
+    resizeCanvas(windowWidth, windowHeight);
+}
 
 function setup() {
+    width = windowWidth;
+    height = windowHeight;
     createCanvas(width, height);
     frameRate(4);
     noStroke();
@@ -71,7 +79,7 @@ function draw() {
             }
             fill(c);
             circle(
-                (i + 1) * (width / 7), height - (j + 1) * (height / 5), 40);
+                (i + 1) * (width / 7), height - (j + 1) * (height / 5), min([width, height]) / 10);
         }
     }
     stroke('#E7F2F8');
