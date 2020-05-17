@@ -38,18 +38,19 @@ function draw() {
     background('#E63946');
     let strokeWeightSegs = min([width, height]) / 48;
     let circleRadius = 5 * (min([width, height]) / 12);
-    let hourLen = 3 * (min([width, height]) / 8);
+    let hourLen = (min([width, height]) / 4);
     let minuteLen = 2 * (min([width, height]) / 6);
-    let secondLen = min([width, height]) / 4;
+    let secondLen = 3 * min([width, height]) / 8;
     let ts = new Time(new Date());
     let angles = ts.toAngleArray();
 
     strokeWeight(strokeWeightSegs);
     translate(width / 2, height / 2);
+
     push();
     stroke('#457B9D');
-    rotate(angles[0]);
-    line(0, 0, 0, -hourLen);
+    rotate(angles[2]);
+    line(0, 0, 0, -secondLen);
     pop();
 
     push();
@@ -60,8 +61,8 @@ function draw() {
 
     push();
     stroke('#F1FAEE');
-    rotate(angles[2]);
-    line(0, 0, 0, -secondLen);
+    rotate(angles[0]);
+    line(0, 0, 0, -hourLen);
     pop();
 
     push();
