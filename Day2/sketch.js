@@ -44,51 +44,40 @@ function setup() {
     noStroke();
 }
 
+function setStroke(isOn, onColor, offColor) {
+    stroke(offColor);
+    if (isOn) {
+        stroke(onColor);
+    }
+}
+
 function drawSegments(number, x, y, scalex, scaley) {
     push();
     translate(x, y);
     let segs = segments[number];
     let padding = min([scalex, scaley]) / 10;
-    stroke('#00A1AB');
-    if (segs[0]) {
-        stroke('#FF5200');
-    }
+    let onColor = '#FF5200';
+    let offColor = '#00414B';
+
+    setStroke(segs[0], onColor, offColor);
     line(padding, 0, scalex - padding, 0);
 
-    stroke('#00A1AB');
-    if (segs[1]) {
-        stroke('#FF5200');
-    }
+    setStroke(segs[1], onColor, offColor);
     line(0, padding, 0, scaley - padding);
 
-    stroke('#00A1AB');
-    if (segs[2]) {
-        stroke('#FF5200');
-    }
+    setStroke(segs[2], onColor, offColor);
     line(scalex, padding, scalex, scaley - padding);
 
-    stroke('#00A1AB');
-    if (segs[3]) {
-        stroke('#FF5200');
-    }
+    setStroke(segs[3], onColor, offColor);
     line(padding, scaley, scalex - padding, scaley);
 
-    stroke('#00A1AB');
-    if (segs[4]) {
-        stroke('#FF5200');
-    }
+    setStroke(segs[4], onColor, offColor);
     line(0, scaley + padding, 0, 2 * scaley - padding);
 
-    stroke('#00A1AB');
-    if (segs[5]) {
-        stroke('#FF5200');
-    }
+    setStroke(segs[5], onColor, offColor);
     line(scalex, scaley + padding, scalex, 2 * scaley - padding);
 
-    stroke('#00A1AB');
-    if (segs[6]) {
-        stroke('#FF5200');
-    }
+    setStroke(segs[6], onColor, offColor);
     line(padding, 2 * scaley, scalex - padding, 2 * scaley);
 
     pop();
@@ -113,7 +102,7 @@ function draw() {
     translate(2 * (xspace) + xstart, 0);
 
     strokeWeight(strokeWeightPoints);
-    stroke('#6F0000');
+    stroke('#EF0000');
     point(xspace, ystart + 10 * yspace);
     point(xspace, ystart + 20 * yspace);
     strokeWeight(strokeWeightSegs);
@@ -125,7 +114,7 @@ function draw() {
     translate(2 * (xspace) + xstart, 0);
 
     strokeWeight(strokeWeightPoints);
-    stroke('#6F0000');
+    stroke('#EF0000');
     point(xspace, ystart + 10 * yspace);
     point(xspace, ystart + 20 * yspace);
     strokeWeight(strokeWeightSegs);
