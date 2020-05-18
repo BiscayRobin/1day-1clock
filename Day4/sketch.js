@@ -2,6 +2,11 @@ Number.prototype.pad = function (n) {
     return new Array(n).join('0').slice((n || 2) * -1) + this;
 }
 
+Array.prototype.splicing = function () {
+    Array.prototype.splice.apply(this, arguments);
+    return this;
+}
+
 class Time {
     constructor(date) {
         this.hour = date.getHours();
@@ -39,10 +44,10 @@ function setup() {
 function draw() {
     let ts = new Time(new Date());
     let color = ts.toColorCode();
-    let txt = color.split('');
-    txt.splice(3, 0, ':');
-    txt.splice(6, 0, ':');
-    txt = txt.join('');
+    let txt = color.split('')
+        .splicing(3, 0, ':')
+        .splicing(6, 0, ':')
+        .join('');
 
     console.log(color, txt);
     textSize(min([width, height]) / 10);
