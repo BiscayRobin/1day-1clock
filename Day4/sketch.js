@@ -39,9 +39,15 @@ function setup() {
 function draw() {
     let ts = new Time(new Date());
     let color = ts.toColorCode();
+    let txt = color.split('');
+    txt.splice(3, 0, ':');
+    txt.splice(6, 0, ':');
+    txt = txt.join('');
+
+    console.log(color, txt);
     textSize(min([width, height]) / 10);
     textAlign(CENTER, CENTER);
     background(color);
     fill(255);
-    text(color, width / 2, height / 2);
+    text(txt, width / 2, height / 2);
 }
