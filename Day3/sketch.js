@@ -31,9 +31,6 @@ function setup() {
     noStroke();
 }
 
-let ts = new Time(new Date());
-let angles = ts.toAngleArray();
-
 function draw() {
     background('#E63946');
     let strokeWeightSegs = min([width, height]) / 48;
