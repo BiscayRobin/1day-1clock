@@ -30,50 +30,88 @@ function setup() {
     height = windowHeight;
     createCanvas(width, height);
     frameRate(4);
+    noStroke();
 }
 
 function draw() {
-    background(0);
+    background("#2EC4B6");
+
+    let rowHeight = height / 6;
+    let betweenRows = rowHeight / 6;
+    let fourLength = width / 5;
+    let fourSpacing = fourLength / 5;
+    let startPadding = fourSpacing;
+    let ElevenLength = (width - 2 * startPadding) / 12;
+    let ElevenSpacing = ElevenLength / 10;
     let ts = new Time(new Date());
     let data = ts.toBerlinClock();
-    console.log(data);
-    fill(255);
-    if (data[4]) {
-        circle(width / 2, height / 8, height / 8);
-    }
+    let offColor = '#011627';
+    let onColor = '#FF9F1C';
+    let fifteenColor = '#E71D36';
+
+    translate(0, betweenRows);
+
     push();
+    //seconds
+    if (data[4])
+        fill(onColor);
+    else
+        fill(offColor);
+    ellipseMode(CENTER);
+    circle(width / 2, rowHeight / 2, rowHeight);
+    pop();
+
+    translate(startPadding, 0);
+    translate(0, betweenRows + rowHeight);
+
+    push();
+    //5 hours
     for (let i = 0; i < 4; i++) {
-        translate(width / 30, 0);
         if (i < data[0])
-            rect(width / 12, 2 * (height / 8), width / 6, height / 8);
-        translate(width / 6, 0);
+            fill(onColor);
+        else
+            fill(offColor);
+        rect(0, 0, fourLength, rowHeight);
+        translate(fourLength + fourSpacing, 0);
     }
     pop();
-    translate(0, (height / 8));
+
+    translate(0, betweenRows + rowHeight);
     push();
+    //hours
     for (let i = 0; i < 4; i++) {
-        translate(width / 30, 0);
         if (i < data[1])
-            rect(width / 12, 2 * (height / 8), width / 6, height / 8);
-        translate(width / 6, 0);
+            fill(onColor);
+        else
+            fill(offColor);
+        rect(0, 0, fourLength, rowHeight);
+        translate(fourLength + fourSpacing, 0);
     }
     pop();
-    translate(0, height / 8);
+
+    translate(0, betweenRows + rowHeight);
     push();
     for (let i = 0; i < 11; i++) {
-        translate(width / 64, 0);
-        if (i < data[2])
-            rect(width / 12, 2 * (height / 8), width / 32, height / 8);
-        translate(width / 32, 0);
+        if (i < data[2] && (i + 1) % 3 === 0)
+            fill(fifteenColor)
+        else if (i < data[2])
+            fill(onColor);
+        else
+            fill(offColor);
+        rect(0, 0, ElevenLength, rowHeight);
+        translate(ElevenLength + ElevenSpacing, 0);
     }
     pop();
-    translate(0, height / 8);
+
+    translate(0, betweenRows + rowHeight);
     push();
     for (let i = 0; i < 4; i++) {
-        translate(width / 30, 0);
         if (i < data[3])
-            rect(width / 12, 2 * (height / 8), width / 6, height / 8);
-        translate(width / 6, 0);
+            fill(onColor);
+        else
+            fill(offColor);
+        rect(0, 0, fourLength, rowHeight);
+        translate(fourLength + fourSpacing, 0);
     }
     pop();
 }
