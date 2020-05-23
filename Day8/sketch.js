@@ -28,39 +28,59 @@ function setup() {
 }
 
 function draw() {
+    let moonSkyColor = '#303030';
+    let sunSkyColor = '#10A3F2';
+    let moonColor = '#D0D5D2';
+    let sunColor = '#E69505';
+    let measureUnit = min([height, width]) / 16;
     let ts = new Time(new Date());
     background(255);
     noFill();
     ellipseMode(CENTER);
-
+    translate(width / 2, height / 2);
     noStroke();
 
-    push();
-    fill('#10A3F2');
-    arc(width / 2, height / 2, 12 * (min([height, width]) / 16), 12 * (min([height, width]) / 16), ts.toDayAngle(), Math.PI + ts.toDayAngle());
+    // sun and moon background
+    fill(sunSkyColor);
+    arc(0, 0, 12 * measureUnit, 12 * measureUnit, ts.toDayAngle(), Math.PI + ts.toDayAngle());
+    fill(moonSkyColor);
+    arc(0, 0, 12 * measureUnit, 12 * measureUnit, Math.PI + ts.toDayAngle(), ts.toDayAngle());
 
-    fill('#303030');
-    arc(width / 2, height / 2, 12 * (min([height, width]) / 16), 12 * (min([height, width]) / 16), Math.PI + ts.toDayAngle(), ts.toDayAngle());
+    //sun and moon model
+    push();
+    fill(sunColor);
+    rotate(Math.PI / 2 + ts.toDayAngle());
+    circle(3 * measureUnit, 0, 3 * measureUnit);
+    rotate(Math.PI);
+    fill(moonColor);
+    circle(3 * measureUnit, 0, 3 * measureUnit, 4 * measureUnit, 0, Math.PI);
+    fill(moonSkyColor);
+    circle(3 * measureUnit, measureUnit, 3 * measureUnit, 4 * measureUnit, 0, Math.PI);
     pop();
 
-    fill(color(0, 35, 106, 210));
-    arc(width / 2, height / 2, 12 * (min([height, width]) / 16), 12 * (min([height, width]) / 16), 0, Math.PI);
+    //hiding side
+    fill(color(0, 35, 106, 225));
+    arc(0, 0, 12 * measureUnit, 12 * measureUnit, 0, Math.PI);
 
-    noFill();
-    strokeWeight((min([height, width]) / 16) / 4);
+    //middle line
+    strokeWeight((measureUnit) / 4);
     stroke('#AAA9AD');
-    line(width / 2 - (6.5 * (min([height, width]) / 16)), height / 2, width / 2 + (6.5 * (min([height, width]) / 16)), height / 2);
+    line(-6.5 * measureUnit, 0, 6.5 * measureUnit, 0);
 
-    strokeWeight((min([height, width]) / 16) / 2);
+    //outer circle
+    noFill();
+    strokeWeight(measureUnit / 2);
     stroke('#DD8F42');
-    circle(width / 2, height / 2, 14 * (min([height, width]) / 16));
+    circle(0, 0, 14 * (measureUnit));
 
-    strokeWeight((min([height, width]) / 16) / 2);
+    //middle circle
+    strokeWeight((measureUnit) / 2);
     stroke('#BD6F22');
-    circle(width / 2, height / 2, 12 * (min([height, width]) / 16));
+    circle(0, 0, 12 * (measureUnit));
 
-    strokeWeight((min([height, width]) / 16) / 1.5);
+    //inner circle
+    strokeWeight((measureUnit) / 1.5);
     stroke('#CD7F32');
-    circle(width / 2, height / 2, 13 * (min([height, width]) / 16));
+    circle(0, 0, 13 * (measureUnit));
 
 }
