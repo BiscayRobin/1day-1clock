@@ -32,40 +32,26 @@ function setup() {
 
 function draw() {
     background('#FFE66D');
-    let strokeWeightSegs = min([width, height]) / 16;
-    let circleRadius = 5 * (min([width, height]) / 16);
-    let ts = new Time(new Date());
-    let angles = ts.toAngleArray();
-    let pointStep = 0.001;
-
-    strokeWeight(strokeWeightSegs);
+    noFill();
     translate(width / 2, height / 2);
 
+    let strokeWeightSegs = min([width, height]) / 16;
+    let circleRadius = 10 * (min([width, height]) / 16);
+    let ts = new Time(new Date());
+    let angles = ts.toAngleArray();
+
+    strokeWeight(strokeWeightSegs);
+
     stroke('#00A8E8');
-    for (let i = 0; i < angles[0]; i += pointStep) {
-        let x = sin(i) * circleRadius;
-        let y = -cos(i) * circleRadius;
-        point(x, y);
-    }
+    arc(0, 0, circleRadius, circleRadius, -HALF_PI, angles[0] - HALF_PI);
 
     stroke('#007EA7');
-    for (let i = 0; i < angles[1]; i += pointStep) {
-        let x = sin(i) * (circleRadius - strokeWeightSegs);
-        let y = -cos(i) * (circleRadius - strokeWeightSegs);
-        point(x, y);
-    }
+    arc(0, 0, circleRadius - 2 * strokeWeightSegs, circleRadius - 2 * strokeWeightSegs, -HALF_PI, angles[1] - HALF_PI);
 
     stroke('#003459');
-    for (let i = 0; i < angles[2]; i += pointStep) {
-        let x = sin(i) * (circleRadius - 2 * strokeWeightSegs);
-        let y = -cos(i) * (circleRadius - 2 * strokeWeightSegs);
-        point(x, y);
-    }
+    arc(0, 0, circleRadius - 4 * strokeWeightSegs, circleRadius - 4 * strokeWeightSegs, -HALF_PI, angles[2] - HALF_PI);
 
-    push();
     noStroke();
     fill('#00171F');
-    circle(0, 0, 2 * (circleRadius - 2.5 * strokeWeightSegs));
-    pop();
-
+    circle(0, 0, circleRadius - 5 * strokeWeightSegs);
 }
