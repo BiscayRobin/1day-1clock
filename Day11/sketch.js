@@ -187,6 +187,8 @@ function draw() {
     let rowHeight = height / 11;
     let rowSpace = rowHeight / 11;
     let charWidth = rowHeight / 2;
+    let lineLength = 10 * charWidth + 12 * rowSpace;
+    let startSpace = (width - lineLength) / 2;
     let ts = new Time(new Date());
     fill(60, 110, 113, 50);
     textFont('Courier New');
@@ -198,13 +200,13 @@ function draw() {
     }
     for (let elem of ts.toPositionList()) {
         for (let l = lastPosition.line; l < elem.line; l++) {
-            text(map[l].substring(lastPosition.idx), width / 4 + lastPosition.idx * charWidth + lastPosition.idx * rowSpace, l * rowHeight + l * rowSpace);
+            text(map[l].substring(lastPosition.idx), startSpace + lastPosition.idx * charWidth + lastPosition.idx * rowSpace, l * rowHeight + l * rowSpace);
             lastPosition.idx = 0;
         }
-        text(map[elem.line].substring(lastPosition.idx, elem.begin), width / 4 + lastPosition.idx * charWidth + lastPosition.idx * rowSpace, elem.line * rowHeight + elem.line * rowSpace);
+        text(map[elem.line].substring(lastPosition.idx, elem.begin), startSpace + lastPosition.idx * charWidth + lastPosition.idx * rowSpace, elem.line * rowHeight + elem.line * rowSpace);
         push();
         fill('#5DB7DE');
-        text(map[elem.line].substring(elem.begin, elem.end), width / 4 + elem.begin * charWidth + elem.begin * rowSpace, elem.line * rowHeight + elem.line * rowSpace);
+        text(map[elem.line].substring(elem.begin, elem.end), startSpace + elem.begin * charWidth + elem.begin * rowSpace, elem.line * rowHeight + elem.line * rowSpace);
         pop();
         lastPosition = {
             line: elem.line,
@@ -212,7 +214,7 @@ function draw() {
         };
     }
     for (let l = lastPosition.line; l < map.length; l++) {
-        text(map[l].substring(lastPosition.idx), width / 4 + lastPosition.idx * charWidth + lastPosition.idx * rowSpace, l * rowHeight + l * rowSpace);
+        text(map[l].substring(lastPosition.idx), startSpace + lastPosition.idx * charWidth + lastPosition.idx * rowSpace, l * rowHeight + l * rowSpace);
         lastPosition.idx = 0;
     }
 }
