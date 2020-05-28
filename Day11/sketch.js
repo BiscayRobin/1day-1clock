@@ -179,7 +179,6 @@ function setup() {
     height = windowHeight;
     createCanvas(width, height);
     frameRate(4);
-    noLoop();
 }
 
 function draw() {
