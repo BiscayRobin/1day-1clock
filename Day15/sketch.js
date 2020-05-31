@@ -38,7 +38,7 @@ function draw() {
     let ts = new Time(new Date());
     let searching = ts.toConcatenatedString();
 
-    let charwidth = 100;
+    let charwidth = width / 20;
     textAlign(CENTER);
     textSize(charwidth);
     textFont('Courier New');
