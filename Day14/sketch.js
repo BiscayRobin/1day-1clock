@@ -26,7 +26,6 @@ function setup() {
 function draw() {
     background('#223843');
     let ts = new Time(new Date());
-    ts.hour = 0;
     let baseRadius = 50;
     translate(width / 2, height / 2);
     if (ts.second % 2 == 0) {
